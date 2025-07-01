@@ -1,4 +1,4 @@
-# GWI – Jedi Team – AI Engineering Challenge
+# Jedi I - AI Graph Agentic Chatbot
 
 This project is a containerized AI assistant system. It features the jedi graph agent chatbot, an API to stream the chat and analytics to a streamlit UI, a postgres db and unit tests.
 

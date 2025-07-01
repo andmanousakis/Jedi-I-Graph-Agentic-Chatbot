@@ -8,7 +8,7 @@ This project is a containerized AI assistant system. It features the jedi graph 
 
 2. Go to that folder and run:
 
-  ``git clone --branch development https://github.com/andmanousakis/Jedi-Graph-Agent-ChatBot.git``
+  ``git clone --branch development https://github.com/andmanousakis/Jedi-I-Graph-Agentic-Chatbot.git)``
 
 3. Navigate to docker dir:
 

@@ -1,0 +1,9 @@
+FROM jedi_base_image
+
+WORKDIR /app
+
+COPY . .
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "ui/st_ui.py", "--server.port=8501", "--server.address=0.0.0.0"]

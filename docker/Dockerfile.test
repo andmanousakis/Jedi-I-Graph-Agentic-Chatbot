@@ -1,0 +1,10 @@
+FROM jedi_base_image
+
+WORKDIR /app
+
+COPY . .
+
+# Add root to PYTHONPATH.
+ENV PYTHONPATH=/app
+
+CMD ["pytest", "tests"]

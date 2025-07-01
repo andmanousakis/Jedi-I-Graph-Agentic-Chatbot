@@ -1,0 +1,70 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: jedi_db
+    restart: always
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_USER: ${PG_DB_USERNAME}
+      POSTGRES_PASSWORD: ${PG_DB_PASSWORD}
+      POSTGRES_DB: ${PG_DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - jedi_net
+  
+  tests:
+    image: jedi_test_image:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.test
+    container_name: jedi_tests
+    env_file:
+      - ../.env
+    volumes:
+      - ../data:/app/data
+    networks:
+      - jedi_net
+
+  api:
+    image: jedi_api_image:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    container_name: jedi_api
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../.env
+    volumes:
+      - ../data:/app/data
+    depends_on:
+      - postgres
+    networks:
+      - jedi_net
+
+  ui:
+    image: jedi_ui_image:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.ui
+    container_name: jedi_ui
+    ports:
+      - "8501:8501"
+    env_file:
+      - ../.env
+    depends_on:
+      - api
+    networks:
+      - jedi_net
+
+networks:
+  jedi_net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    name: jedi_postgres_data
